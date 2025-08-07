@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  # Наше FastAPI приложение
+  app:
+    build: . # Собираем образ из Dockerfile в текущей директории
+    env_file:
+      - .env # Подключаем файл с переменными окружения
+    ports:
+      - "8000:8000" # Пробрасываем порт 8000 из контейнера на наш компьютер
+    depends_on:
+      - db # Указываем, что наше приложение зависит от базы данных
+
+  # База данных PostgreSQL
+  db:
+    image: postgres:15-alpine # Используем готовый образ PostgreSQL
+    env_file:
+      - .env # Подключаем тот же файл с переменными
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/ # Сохраняем данные БД между перезапусками
+    ports:
+      - "5432:5432" # Пробрасываем порт базы данных
+
+volumes:
+  postgres_data:

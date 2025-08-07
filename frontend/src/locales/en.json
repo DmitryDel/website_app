@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "whyItWorks": "Why It Works",
+    "studySmarter": "Study Smarter",
+    "contacts": "Contacts",
+    "login": "Log In",
+    "register": "Sign Up"
+  },
+  "hero": {
+    "title": "Advanced flashcards for learning English",
+    "cardFront": "Unlock your potential.",
+    "cardBack": "Learn new words daily and see your skill grow!"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
+}
