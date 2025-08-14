@@ -1,19 +1,6 @@
-// import axios from 'axios';
 import api from './api'; // <-- Импортируем наш центральный экземпляр
 import { type CardSetRead } from '../types/set';
-
-// const API_URL = 'http://localhost:8000/api/v1';
-// const api = axios.create({ baseURL: API_URL });
-//
-// // Тот же самый перехватчик для консистентности
-// api.interceptors.request.use(config => {
-//   const authStorage = JSON.parse(localStorage.getItem('auth-storage') || '{}');
-//   const token = authStorage?.state?.token;
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// });
+import { type SetPayload } from "../types/api.ts";
 
 // --- Типы для параметров ---
 interface GetSetsParams {
@@ -23,9 +10,13 @@ interface GetSetsParams {
     tags?: string[]; // Фильтрация по тегам
 }
 
-interface SetPayload { name: string; description?: string | null; is_public: boolean; tags: string[]; }
-
 // --- Функции API ---
+
+export const getSetById = async (setId: number): Promise<CardSetRead> => {
+  const response = await api.get(`/sets/${setId}`);
+  return response.data;
+};
+
 export const getSetsByFolder = async (folderId: number, params: GetSetsParams): Promise<CardSetRead[]> => {
   const response = await api.get(`/folders/${folderId}/sets`, { params });
   return response.data;
